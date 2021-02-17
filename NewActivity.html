@@ -30,38 +30,39 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
 
 
-    <title>Crear actividad</title>
+    <title>Registro Actividad</title>
 </head>
 
 <body>
     <form id="fm" class="border border-light p-5">
         <button class="btn btn-default" type="button" id="btnMenu">Volver al menu</button>
-        <p class="h4 mb-4 text-center">Nueva actividad</p>
+        <p class="h4 mb-4 text-center">Registro Actividad</p>
 
-        <label for="ActivityType">Actividad:</label>
+        <label for="Activity">Actividad:</label>
+        <select class="browser-default custom-select mb-4" id="Activity" name="Activity">
+            <option value="C" selected="">Llamada Telefonica</option>
+            <option value="M">Reunion</option>
+            <option value="T">Tarea</option>
+            <option value="E">Nota</option>
+            <option value="P">Campaña</option>
+            <option value="N">Otros</option>
+        </select>
+
+        <label for="ActivityType">Tipo:</label>
         <select class="browser-default custom-select mb-4" id="ActivityType" name="ActivityType">
-            <option value="0" selected="">Llamada Telefonica</option>
-            <option value="1">Reunion</option>
-            <option value="2">Tarea</option>
-            <option value="3">Nota</option>
-            <option value="4">Campaña</option>
-            <option value="5">Otros</option>
-        </select>
-
-        <label for="Type">Tipo:</label>
-        <select class="browser-default custom-select mb-4" id="Type" name="Type">
             <option value="-1" selected="">General</option>
-            <option value="1">Nuevo producto</option>
-            <option value="2">Cobranza</option>
+            <option value="1">Cobranza</option>
+            <option value="2">Comercial</option>
+            <option value="3">Produccion</option>
+            <option value="4">Consulta Medica</option>
         </select>
 
-        <label for="Subject">Asunto:</label>
-        <select class="browser-default custom-select mb-4" id="Subject" name="Subject">
-            <option value="-1" selected="">Asunto1</option>
-            <option value="1"> Asunto2</option>
-            <option value="2">Asunto3</option>
-        </select>
-
+        <!--  <label for="ActivitySubject">Asunto:</label>
+        <select class="browser-default custom-select mb-4" id="ActivitySubject" name="ActivitySubject">
+            <option value="1" selected="">Demo</option>
+            <option value="2"> Forecast</option>
+            <option value="3">Contacto</option>
+        </select> -->
 
         <label for="CardCode">Codigo Socio Negocio: (Ejemplo: 34501615-5C L10001)</label>
         <div class="input-group">
@@ -87,9 +88,11 @@
         <label for="EndTime">Hora termino actividad:</label>
         <input type="text" id="EndTime" name="EndTime" class="form-control mb-4"
             placeholder="Hora termino actividad">
+        <label for="Duration">Duracion:</label>
+        <input type="text" id="Duration" name="Duration" class="form-control mb-4">
         <label for="Details">Comentario:</label>
-        <textarea  id="Details" name="Details" maxlength="100" rows="3" class="form-control mb-4" placeholder="Comentario"></textarea>
-        <button class="btn btn-default btn-block my-4" type="submit" id="btnSave">Salvar</button>
+        <textarea  id="Details" name="Details" maxlength="100" rows="3" class="form-control mb-4" placeholder="Describa la actividad realizada..."></textarea>
+        <button class="btn btn-default btn-block my-4" type="submit" id="btnSave">Crear</button>
 
     </form>
     <form id="ms" class="border border-light p-5">
@@ -104,6 +107,7 @@
         <div id="searchTable"></div>
     </form>
 </body>
+
 <script>
     (function ($) {
         $.fn.serializeFormJSON = function () {
@@ -181,11 +185,11 @@
 
         $('#StartTime').timepicker({
             timeFormat: 'h:mm p',
-            interval: 60,
-            minTime: '10',
-            maxTime: '8:00pm',
-            defaultTime: '11',
-            startTime: '8:00',
+            interval: 15,
+            minTime: '8',
+            maxTime: '6:30pm',
+            defaultTime: '8:30',
+            startTime: '8:30',
             dynamic: false,
             dropdown: true,
             scrollbar: true
@@ -193,11 +197,11 @@
 
         $('#EndTime').timepicker({
             timeFormat: 'h:mm p',
-            interval: 60,
-            minTime: '10',
-            maxTime: '8:00pm',
-            defaultTime: '11',
-            startTime: '8:00',
+            interval: 15,
+            minTime: '8',
+            maxTime: '6:30pm',
+            defaultTime: '8:45',
+            startTime: '8:30',
             dynamic: false,
             dropdown: true,
             scrollbar: true
@@ -222,7 +226,7 @@
             if (result.startsWith("error:")) {
                 alert(result.replace("error:", ""));
             } else {
-                alert("Actividad grabada");
+                alert("Actividad grabada"); //indicar ID de la activiad
                 window.location.href = 'Home.html';
             }           
         });

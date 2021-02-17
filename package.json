@@ -1,13 +1,13 @@
 {
-  "name": "simple-node-website",
-  "version": "0.1.0",
-  "description": "A simple website built with Node, Express and Pug",
+  "name": "registro_actividad_vk",
+  "version": "1.0.0",
+  "description": "Proyecto WebSite para el registro de Actividad a traves de Service Layer hecho con Javascript y Node Express",
   "main": "server.js",
   "scripts": {
     "start": ""
   },
-  "author": "Ayo Isaiah",
-  "license": "MIT",
+  "author": "Antonio Sanchez",
+  "license": "Visual Developer Lincense",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
