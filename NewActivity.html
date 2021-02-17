@@ -38,7 +38,7 @@
         <button class="btn btn-default" type="button" id="btnMenu">Volver al menu</button>
         <p class="h4 mb-4 text-center">Nueva actividad</p>
 
-        <label for="ActivityType">Tipo de actividad:</label>
+        <label for="ActivityType">Actividad:</label>
         <select class="browser-default custom-select mb-4" id="ActivityType" name="ActivityType">
             <option value="0" selected="">Llamada Telefonica</option>
             <option value="1">Reunion</option>
@@ -48,30 +48,47 @@
             <option value="5">Otros</option>
         </select>
 
-        <label for="CardCode">Codigo SN: (Ejemplo: 34501615-5C L10001)</label>
+        <label for="Type">Tipo:</label>
+        <select class="browser-default custom-select mb-4" id="Type" name="Type">
+            <option value="-1" selected="">General</option>
+            <option value="1">Nuevo producto</option>
+            <option value="2">Cobranza</option>
+        </select>
+
+        <label for="Subject">Asunto:</label>
+        <select class="browser-default custom-select mb-4" id="Subject" name="Subject">
+            <option value="-1" selected="">Asunto1</option>
+            <option value="1"> Asunto2</option>
+            <option value="2">Asunto3</option>
+        </select>
+
+
+        <label for="CardCode">Codigo Socio Negocio: (Ejemplo: 34501615-5C L10001)</label>
         <div class="input-group">
             <input type="text" id="CardCode" name="CardCode" class="form-control ">
             <span class="input-group-btn">
                 <button class="btn btn-default" type="button" id="btnZoom">...</button>
             </span>
         </div>
-        <label for="CardName">Nombre SN:</label>
+        <label for="CardName">Nombre Socio Negocio:</label>
         <input type="text" id="CardName" class="form-control mb-4" readonly=true>
         <label for="ContactPersonCode">Persona de contacto:</label>
         <select class="browser-default custom-select mb-4" id="ContactPersonCode" name="ContactPersonCode">
         </select>
-        <label for="StartDate">Fecha de la actividad:</label>
+        <label for="StartDate">Fecha Inicio actividad:</label>
         <input type="text" id="StartDate" name="StartDate" class="form-control mb-4"
-            placeholder="Fecha de la actividad">
-        <label for="StartTime">Hora inicio de la actividad:</label>
+            placeholder="dd-mm-yyyy">
+        <label for="StartTime">Hora inicio actividad:</label>
         <input type="text" id="StartTime" name="StartTime" class="form-control mb-4"
-            placeholder="Hora inicio de la actividad">
-        <label for="EndTime">Hora termino de la actividad:</label>
+            placeholder="Hora inicio actividad">
+        <label for="EndDueDate">Fecha termino actividad:</label>
+        <input type="text" id="EndDueDate" name="EndDueDate" class="form-control mb-4"
+            placeholder="dd-mm-yyyy">
+        <label for="EndTime">Hora termino actividad:</label>
         <input type="text" id="EndTime" name="EndTime" class="form-control mb-4"
-            placeholder="Hora termino de la actividad">
+            placeholder="Hora termino actividad">
         <label for="Details">Comentario:</label>
-        <input type="text" id="Details" name="Details" class="form-control mb-4" placeholder="Comentario">
-
+        <textarea  id="Details" name="Details" maxlength="100" rows="3" class="form-control mb-4" placeholder="Comentario"></textarea>
         <button class="btn btn-default btn-block my-4" type="submit" id="btnSave">Salvar</button>
 
     </form>
@@ -147,6 +164,14 @@
         });
 
         $('#StartDate').datepicker({
+            locale: 'es-es',
+            format: 'dd-mm-yyyy',
+            uiLibrary: 'bootstrap',
+            ishowOnFocus: true,
+            showRightIcon: false
+        });
+
+        $('#EndDueDate').datepicker({
             locale: 'es-es',
             format: 'dd-mm-yyyy',
             uiLibrary: 'bootstrap',
