@@ -1,0 +1,9 @@
+{
+    "host": "https://datacenter.visualk.cl:55500",
+    "baseurl": "b1s/v1",
+    "loginLogout": true,
+    "checkLogin": true,
+    "user": "jpstifel",
+    "password": "zzXX1122",
+    "company": "VK_DEMO"
+}

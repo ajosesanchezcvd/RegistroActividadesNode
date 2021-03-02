@@ -77,14 +77,14 @@
         <select class="browser-default custom-select mb-4" id="ContactPersonCode" name="ContactPersonCode">
         </select>
         <label for="StartDate">Fecha Inicio actividad:</label>
-        <input type="text" id="StartDate" name="StartDate" class="form-control mb-4"
+        <input type="text" id="StartDate" name="StartDate" class="form-control mb-4" autocomplete="off"
             placeholder="dd-mm-yyyy">
+        <label for="EndDueDate">Fecha termino actividad:</label>
+        <input type="text" id="EndDueDate" name="EndDueDate" class="form-control mb-4" autocomplete="off" 
+             placeholder="dd-mm-yyyy" >
         <label for="StartTime">Hora inicio actividad:</label>
         <input type="text" id="StartTime" name="StartTime" class="form-control mb-4"
             placeholder="Hora inicio actividad">
-        <label for="EndDueDate">Fecha termino actividad:</label>
-        <input type="text" id="EndDueDate" name="EndDueDate" class="form-control mb-4"
-            placeholder="dd-mm-yyyy">
         <label for="EndTime">Hora termino actividad:</label>
         <input type="text" id="EndTime" name="EndTime" class="form-control mb-4"
             placeholder="Hora termino actividad">
@@ -193,7 +193,8 @@
             startTime: '8:30',
             dynamic: false,
             dropdown: true,
-            scrollbar: true
+            scrollbar: true,
+            super:true
         });
 
         $('#EndTime').timepicker({
