@@ -22,16 +22,24 @@
 <body>
     <form id="fm" class="border border-light p-5">
 
-        <p class="h4 mb-4 text-center">Ingreso al sistema</p>
-
+        <p class="h4 mb-4 text-center">Ingreso SAP</p>
+        <input type="text" id="server" class="form-control mb-4" placeholder="Server" disabled="true">
         <input type="text" id="user" class="form-control mb-4" placeholder="Usuario">
         <input type="password" id="password" class="form-control mb-4" placeholder="Password">
       <!--  <input type="text" id="company" class="form-control mb-4" placeholder="Sociedad"> -->
         <select id="company" name="company" class="form-control mb-4" placeholder="Sociedad">
             <option value="VISUALK_CL" selected>Visual Knowledge Chile S.A.</option>
-            <option value="TEST_VISUALK_CL" >VK_PROD_TEST</option>
-            <option value="VK_VD"> VK_VD</option>
-            <option value="VISUALK">VISUALK</option>
+            <option value="VISUALK_PE_2" >VisualK Negocios S.A.C.</option>
+            <option value="VISUALK_PE_FE"> FE VisualK Negocios S.A.C.</option>
+            <option value="MASTER_VISUALK_PE_2">zzzz.Master VisualK Negocios S.A.C.</option>
+            <option value="TEST_VK_RINDEGASTOS" >TEST  Visual Knowledge Chile S.A.</option>
+            <option value="VK_PROCESOS"> Procesos e Innovación</option>
+            <option value="VISUALK_MKT">VisualK Marketing IntL.</option>
+            <option value="SBO_VK_SEMILLA3"> SBO_VK_SEMILLA</option>
+            <option value="CIERRE_VISUALK_AR"> CIERRE VK ARGENTINA</option>
+            <option value="VISUALK_PE_2012">VisualK Peru (2012)</option>
+            <option value="VISUALD_CL_1">Visual Developer Chile S.A.</option>
+            <option value="20181126_VK_CL_TEST">** TEST VK Chile **</option>
         </select>
 
         <button class="btn btn-info btn-block my-4" type="submit" id="btnLogin">Ingresar</button>
@@ -44,6 +52,7 @@
             e.preventDefault();
             Login();
         });
+        $("#server").val("hanab1vk:30015");
         $("#user").val("asanchez");
         $("#password").val("19045403");
        // $("#company").val("VK_DEMO");
@@ -69,7 +78,11 @@
             if (result.startsWith("error:")) {
                 alert(result.replace("error:",""));
             } else {
+                let json = result.serializeFormJSON;
+                console.log(result)
+                console.log(json)
                 alert("Cookie: " + result);
+                
                 window.location.href = 'Home.html';
             }
         });

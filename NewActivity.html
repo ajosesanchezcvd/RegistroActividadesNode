@@ -30,13 +30,13 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
 
 
-    <title>Registro Actividad</title>
+    <title>Registrar Actividad</title>
 </head>
 
 <body>
     <form id="fm" class="border border-light p-5">
         <button class="btn btn-default" type="button" id="btnMenu">Volver al menu</button>
-        <p class="h4 mb-4 text-center">Registro Actividad</p>
+        <p class="h4 mb-4 text-center">Registrar Actividad</p>
 
         <label for="Activity">Actividad:</label>
         <select class="browser-default custom-select mb-4" id="Activity" name="Activity">
@@ -51,20 +51,26 @@
         <label for="ActivityType">Tipo:</label>
         <select class="browser-default custom-select mb-4" id="ActivityType" name="ActivityType">
             <option value="-1" selected="">General</option>
-            <option value="1">Cobranza</option>
-            <option value="2">Comercial</option>
-            <option value="3">Produccion</option>
-            <option value="4">Consulta Medica</option>
+            <option value="1">Implementación</option>
+            <option value="2">Consultoria</option>
+            <option value="3">Comercial</option>
+            <option value="4">Interna</option>
+            <option value="5">Soporte</option>
+            <option value="6">Administrativa</option>
+            <option value="7">Cobranza</option>
+            <option value="8">Desarrollo</option>
         </select>
 
         <label for="Subject">Asunto:</label>
         <select class="browser-default custom-select mb-4" id="Subject" name="Subject">
-            <option value="1" selected="">Demo</option>
-            <option value="2"> Forecast</option>
-            <option value="3">Contacto</option>
+            <option value="32" selected="">General</option>
+            <option value="45"> Demo HROne</option>
+            <option value="51"> Otros</option>
+            <option value="55"> Charlas</option>
+            <option value="73"> Relevamiento</option>
         </select> 
 
-        <label for="CardCode">Codigo Socio Negocio: (Ejemplo: 34501615-5C L10001)</label>
+        <label for="CardCode">Codigo Socio Negocio:</label>
         <div class="input-group">
             <input type="text" id="CardCode" name="CardCode" class="form-control ">
             <span class="input-group-btn">
@@ -76,7 +82,7 @@
         <label for="ContactPersonCode">Persona de contacto:</label>
         <select class="browser-default custom-select mb-4" id="ContactPersonCode" name="ContactPersonCode">
         </select>
-        <label for="StartDate">Fecha Inicio actividad:</label>
+        <label for="StartDate">Fecha inicio actividad:</label>
         <input type="text" id="StartDate" name="StartDate" class="form-control mb-4" autocomplete="off"
             placeholder="dd-mm-yyyy">
         <label for="EndDueDate">Fecha termino actividad:</label>
@@ -228,7 +234,10 @@
             if (result.startsWith("error:")) {
                 alert(result.replace("error:", ""));
             } else {
-                alert("Actividad grabada"); //indicar ID de la activiad
+                var o = JSON.parse(result);
+                //let json = result.serializeFormJSON;
+                console.log(o.ActivityCode);
+                alert("Actividad grabada en SAP codigo: " + o.ActivityCode); //indicar ID de la activiad
                 window.location.href = 'Home.html';
             }           
         });
