@@ -30,13 +30,13 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
 
 
-    <title>Registro Actividad</title>
+    <title>Registrar Actividad</title>
 </head>
 
 <body>
     <form id="fm" class="border border-light p-5">
         <button class="btn btn-default" type="button" id="btnMenu">Volver al menu</button>
-        <p class="h4 mb-4 text-center">Registro Actividad</p>
+        <p class="h4 mb-4 text-center">Registrar Actividad</p>
 
         <label for="Activity">Actividad:</label>
         <select class="browser-default custom-select mb-4" id="Activity" name="Activity">
@@ -51,20 +51,26 @@
         <label for="ActivityType">Tipo:</label>
         <select class="browser-default custom-select mb-4" id="ActivityType" name="ActivityType">
             <option value="-1" selected="">General</option>
-            <option value="1">Cobranza</option>
-            <option value="2">Comercial</option>
-            <option value="3">Produccion</option>
-            <option value="4">Consulta Medica</option>
+            <option value="1">Implementación</option>
+            <option value="2">Consultoria</option>
+            <option value="3">Comercial</option>
+            <option value="4">Interna</option>
+            <option value="5">Soporte</option>
+            <option value="6">Administrativa</option>
+            <option value="7">Cobranza</option>
+            <option value="8">Desarrollo</option>
         </select>
 
         <label for="Subject">Asunto:</label>
         <select class="browser-default custom-select mb-4" id="Subject" name="Subject">
-            <option value="1" selected="">Demo</option>
-            <option value="2"> Forecast</option>
-            <option value="3">Contacto</option>
+            <option value="32" selected="">General</option>
+            <option value="45"> Demo HROne</option>
+            <option value="51"> Otros</option>
+            <option value="55"> Charlas</option>
+            <option value="73"> Relevamiento</option>
         </select> 
 
-        <label for="CardCode">Codigo Socio Negocio: (Ejemplo: 34501615-5C L10001)</label>
+        <label for="CardCode">Codigo Socio Negocio:</label>
         <div class="input-group">
             <input type="text" id="CardCode" name="CardCode" class="form-control ">
             <span class="input-group-btn">
@@ -76,7 +82,7 @@
         <label for="ContactPersonCode">Persona de contacto:</label>
         <select class="browser-default custom-select mb-4" id="ContactPersonCode" name="ContactPersonCode">
         </select>
-        <label for="StartDate">Fecha Inicio actividad:</label>
+        <label for="StartDate">Fecha nicio actividad:</label>
         <input type="text" id="StartDate" name="StartDate" class="form-control mb-4" autocomplete="off"
             placeholder="dd-mm-yyyy">
         <label for="EndDueDate">Fecha termino actividad:</label>
@@ -110,6 +116,7 @@
 </body>
 
 <script>
+
     (function ($) {
         $.fn.serializeFormJSON = function () {
 
@@ -148,7 +155,7 @@
         });
 
         $("#btnSearch").click(function (e) {
-            searchBusinessPartners()
+            searchBusinessPartnersbi1()
             e.preventDefault();
         });
 
@@ -228,7 +235,7 @@
             if (result.startsWith("error:")) {
                 alert(result.replace("error:", ""));
             } else {
-                alert("Actividad grabada"); //indicar ID de la activiad
+                alert("Actividad grabada" + result.jsonStr); //indicar ID de la activiad
                 window.location.href = 'Home.html';
             }           
         });
@@ -288,7 +295,7 @@
         $("#fm").show();
         CardCodeChanged();
     }
-
+/*
     function searchBusinessPartners() {
         $("#btnSearch").prop("disabled", true);
         jQuery.ajax({
@@ -306,6 +313,7 @@
             }
             else {
                 var r = JSON.parse(result);
+                console.log(r);
                 var t = $('<table><thead><tr><th>Codigo</th><th>Nombre</th></tr></thead></table>').addClass('table table-striped');
                 //var tbody = $('<tbody></tbody>');
                 //table.append(tbody);
@@ -319,6 +327,64 @@
             }
         });
     }
+*/
+
+/*function searchBusinessPartnersbi1() {
+        $("#btnSearch").prop("disabled", true);
+        jQuery.ajax({
+            type: 'post',
+            dataType: "text",
+            contentType: 'application/json',
+            url: 'http://datacenter.visualk.cl:60880/B1iXcellerator/exec/ipo/.DEV.VID.FramworkVD.VID.VisualK_CL/com.sap.b1i.dev.scenarios.setup/VID.FramworkVD/VID.VisualK_CL.ipo/VIDVisualKCL.VID.ReceiveDoQuery',
+            async: false,
+            timeout: 15000,
+            data: '{  command": " SELECT \"CardCode\", \"CardName\"   FROM \"VISUALK_CL\".\"OCRD\"  WHERE LOWER(\"CardCode\") LIKE LOWER(%Visual%)" }'
+        }).done(function (result) {
+            alert(data);
+            $("#btnSearch").prop("disabled", false);
+            if (result.startsWith("error:")) {
+                alert(result.replace("error:", ""));
+            }
+            else {
+                var r = JSON.parse(result);
+                console.log(r);
+                var t = $('<table><thead><tr><th>Codigo</th><th>Nombre</th></tr></thead></table>').addClass('table table-striped');
+                //var tbody = $('<tbody></tbody>');
+                //table.append(tbody);
+                for (var i = 0; i < r.value.length; i++) {
+                    var record = r.value[i];
+                    var row = "<tr id='@0' onclick='selectRow(\"@1\")'><td style='cursor:pointer'>@1</td><td style='cursor:pointer'>@2</td>";
+                    row = row.replace(/@0/g, "tr_" + i).replace(/@1/g, record.CardCode).replace(/@2/g, record.CardName);
+                    t.append(row);
+                }
+                $('#searchTable').append(t);
+            }
+        });
+    }
+
+*/
+
+function searchBusinessPartnersbi1() {
+        $("#btnSearch").prop("disabled", true);
+        var Utils = require('./utils.js');
+        var request = require('request');
+        var options = {
+        'method': 'POST',
+        'url': 'http://datacenter.visualk.cl:60880/B1iXcellerator/exec/ipo/.DEV.VID.FramworkVD.VID.VisualK_CL/com.sap.b1i.dev.scenarios.setup/VID.FramworkVD/VID.VisualK_CL.ipo/VIDVisualKCL.VID.ReceiveDoQuery',
+        'headers': {
+            'Content-Type': 'application/json',
+            'Cookie': 'JSESSIONID=390CCEE02AFA3640017D930658E9CEE0'
+        },
+        body: JSON.stringify({"command":" SELECT \"CardCode\", \"CardName\"   FROM \"VISUALK_CL\".\"OCRD\"  WHERE LOWER(\"CardCode\") LIKE LOWER('%Visual%')"})
+        };
+        request(options, function (error, response) {
+        if (error) throw new Error(error);
+        console.log(response.body);
+        });
+     
+    }
+
+
 </script>
 
 </html>

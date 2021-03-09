@@ -42,6 +42,10 @@ class Sbo {
         return this.utils.SiteSetting("host") + "/" + this.utils.SiteSetting("baseurl") + "/";
     }
 
+    get geturlBi1(){
+        return (this.utils.SiteSetting("urlB1i"));
+    }
+
     setRequestCookies(req) {
         let options = {
             maxAge: 1000 * 60 * 15, // would expire after 15 minutes
@@ -145,6 +149,27 @@ class Sbo {
             callback(result);
         });
     }
+
+    GetBusinessPartnerB1i(json, callback) {
+        var req = require("request");
+        let url = this.geturlBi1;
+        req.post({
+           // "rejectUnauthorized": false,
+            "headers": { "content-type": "application/json" },
+            "url": this.geturlBi1,
+            /*headers: {
+                'Cookie': this.utils.stringFormat("B1SESSION=%s,ROUTEID=%s", this.B1SESSION, this.ROUTEID)
+            },*/
+            "body":  '{  "command": " SELECT \"CardCode\", \"CardName\"   FROM \"VISUALK_CL\".\"OCRD\"  WHERE LOWER(\"CardCode\") LIKE LOWER(%Visual%)" }'
+        }, (error, response, body) => {
+            var result = this.GetError(error, body);
+            if (!this.utils.isError(result)) {
+                result = body
+            }
+            callback(result);
+        });
+    }
+
 
     GetBusinessPartners(filter, callback) {
         var req = require("request");
