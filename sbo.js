@@ -146,9 +146,33 @@ class Sbo {
         });
     }
 
+    
+    GetActivitySubjects(code, callback){
+        var req = require("request");
+        //let url = this.geturl + "ActivitySubjects?$select=Code,Description&$filter=ActivityType ge 8 ";;
+        //console.log("codigo:" + code);
+       let url = this.geturl + "ActivitySubjects?$select=Code,Description&$filter=ActivityType ge " + code;
+      
+        req.get({
+            "rejectUnauthorized": false,
+            "url": url,
+            headers: {
+                'Cookie': this.utils.stringFormat("B1SESSION=%s,ROUTEID=%s", this.B1SESSION, this.ROUTEID)
+            }
+        }, (error, response, body) => {
+            var result = this.GetError(error, body);
+            if (!this.utils.isError(result)) {
+                result = body
+            }
+            callback(result);
+        });
+    }
+
+
+
     GetBusinessPartners(filter, callback) {
         var req = require("request");
-        let command = "BusinessPartners?$select=CardCode,CardName&$top=100";
+        let command = "BusinessPartners?$select=CardCode,CardName&$top=10";
         if ((filter != null) && (filter != "")) {
             filter = this.utils.stringFormat("startswith(CardCode, '%s') or startswith(CardName, '%s')", filter, filter);
             command = command + "&$filter=" + filter;
