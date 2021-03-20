@@ -84,8 +84,22 @@ router.post('/GetBusinessPartner', (req, res) => {
     });
 });
 
+<<<<<<< HEAD
 
 router.post('/AddActivity', (req, res) => {
+=======
+router.post('/GetActivitySubjects', (req, res) => {
+    var result = "";
+    sbo.B1SESSION = req.cookies.B1SESSION;
+    sbo.ROUTEID = req.cookies.ROUTEID;
+    let body = req.body;
+    result = sbo.GetActivitySubjects(body, function (result) {
+        res.send(result);
+    });
+});
+
+router.post('/GetBusinessPartners', (req, res) => {
+>>>>>>> tmp
     sbo.B1SESSION = req.cookies.B1SESSION;
     sbo.ROUTEID = req.cookies.ROUTEID;
     let body = req.body;

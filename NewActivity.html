@@ -63,11 +63,15 @@
 
         <label for="Subject">Asunto:</label>
         <select class="browser-default custom-select mb-4" id="Subject" name="Subject">
+<<<<<<< HEAD
             <option value="32" selected="">General</option>
             <option value="45"> Demo HROne</option>
             <option value="51"> Otros</option>
             <option value="55"> Charlas</option>
             <option value="73"> Relevamiento</option>
+=======
+            <option value="-1" selected=""></option>
+>>>>>>> tmp
         </select> 
 
         <label for="CardCode">Codigo Socio Negocio:</label>
@@ -82,9 +86,13 @@
         <label for="ContactPersonCode">Persona de contacto:</label>
         <select class="browser-default custom-select mb-4" id="ContactPersonCode" name="ContactPersonCode">
         </select>
+<<<<<<< HEAD
         <label for="StartDate">Fecha nicio actividad:</label>
+=======
+        <label for="StartDate">Fecha inicio actividad:</label>
+>>>>>>> tmp
         <input type="text" id="StartDate" name="StartDate" class="form-control mb-4" autocomplete="off"
-            placeholder="dd-mm-yyyy">
+           >
         <label for="EndDueDate">Fecha termino actividad:</label>
         <input type="text" id="EndDueDate" name="EndDueDate" class="form-control mb-4" autocomplete="off" 
              placeholder="dd-mm-yyyy" >
@@ -96,14 +104,25 @@
             placeholder="Hora termino actividad">
       <!--  <label for="Duration">Duracion:</label>
         <input type="text" id="Duration" name="Duration" class="form-control mb-4">--> 
+
+        <label for="U_Ubicacion">Ubicacion:</label>
+        <select class="browser-default custom-select mb-4" id="U_Ubicacion" name="U_Ubicacion">
+            <option value="" selected="">Remoto</option>
+            <option value="Cliente">Cliente</option>
+            <option value="VisualK">VisualK</option>
+            <option value="SAP">SAP</option>
+            <option value="Consultor">Consultor</option>
+            <option value="Otro">Otro</option>
+        </select>
+
         <label for="Details">Comentario:</label>
         <textarea  id="Details" name="Details" maxlength="100" rows="3" class="form-control mb-4" placeholder="Describa la actividad realizada..."></textarea>
         
-        <button class="btn btn-default btn-block my-4" type="submit" id="btnSave">Crear</button>
-
+        <button class="btn btn-info btn-block my-4" type="submit" id="btnSave">Crear</button>
+        
     </form>
     <form id="ms" class="border border-light p-5">
-        <p class="h4 mb-4 text-center">Buscar socios de negocio</p>
+        <p class="h4 mb-4 text-center">Buscar socio de negocio</p>
         <div class="input-group">
             <input type="text" id="Filter" class="form-control ">
             <span class="input-group-btn">
@@ -117,6 +136,14 @@
 
 <script>
 
+<<<<<<< HEAD
+=======
+        
+    
+
+   // $("#server").val("hanab1vk:30015");
+
+>>>>>>> tmp
     (function ($) {
         $.fn.serializeFormJSON = function () {
 
@@ -151,11 +178,19 @@
         $("#btnZoom").click(function (e) {
             $("#fm").hide();
             $("#ms").show();
+            removeTableHeader();
+            removeTableBody();
             e.preventDefault();
         });
 
         $("#btnSearch").click(function (e) {
+<<<<<<< HEAD
             searchBusinessPartnersbi1()
+=======
+            removeTableHeader();
+            removeTableBody();
+            searchBusinessPartners()
+>>>>>>> tmp
             e.preventDefault();
         });
 
@@ -175,6 +210,25 @@
             e.preventDefault();
         });
 
+        $("#ActivityType").change(function (e){
+           
+            ActivityTypeChange();
+            e.preventDefault();
+        });
+
+        window.onload=init;
+        function init()
+        {
+            $("#StartDate").val(getDateFormat());  
+            $("#EndDueDate").val(getDateFormat());
+            //alert("cargando pagina");
+            $("#StartTime").val(getHourFormat(0));
+            $("#EndTime").val(getHourFormat(1));
+
+            console.log(getHourFormat());
+            
+        }
+
         $('#StartDate').datepicker({
             locale: 'es-es',
             format: 'dd-mm-yyyy',
@@ -188,16 +242,18 @@
             format: 'dd-mm-yyyy',
             uiLibrary: 'bootstrap',
             ishowOnFocus: true,
-            showRightIcon: false
+            showRightIcon: false,
+            startDate: getDateFormat()
         });
+  
 
         $('#StartTime').timepicker({
             timeFormat: 'h:mm p',
-            interval: 15,
+            interval: 60,
             minTime: '8',
-            maxTime: '6:30pm',
-            defaultTime: '8:30',
-            startTime: '8:30',
+            maxTime: '7:00pm',
+            defaultTime: '9',
+            startTime: '9',
             dynamic: false,
             dropdown: true,
             scrollbar: true,
@@ -206,11 +262,11 @@
 
         $('#EndTime').timepicker({
             timeFormat: 'h:mm p',
-            interval: 15,
+            interval: 60,
             minTime: '8',
-            maxTime: '6:30pm',
-            defaultTime: '8:45',
-            startTime: '8:30',
+            maxTime: '7:00pm',
+            defaultTime: '10',
+            startTime: '10',
             dynamic: false,
             dropdown: true,
             scrollbar: true
@@ -235,13 +291,21 @@
             if (result.startsWith("error:")) {
                 alert(result.replace("error:", ""));
             } else {
+<<<<<<< HEAD
                 alert("Actividad grabada" + result.jsonStr); //indicar ID de la activiad
+=======
+                var o = JSON.parse(result);
+                //let json = result.serializeFormJSON;
+                console.log(o.ActivityCode);
+                alert("Actividad registrada en SAP codigo: " + o.ActivityCode); //indicar ID de la activiad
+>>>>>>> tmp
                 window.location.href = 'Home.html';
             }           
         });
     }
 
     function CardCodeChanged() {
+        
         if ($("#CardCode").val() == "") {
             $("#CardName").val("");
             $('#ContactPersonCode').find('option').remove();
@@ -288,15 +352,86 @@
 
     }
 
+
+    function ActivityTypeChange(){
+        console.log("CAMBIO TIPO ACTIVIDAD:" + $("#ActivityType").val());
+        //$('#ActivityType').find('option').remove();
+
+        jQuery.ajax({
+                    type: 'post',
+                    dataType: "text",
+                    contentType: 'application/text',
+                    url: 'GetActivitySubjects',
+                    async: true,
+                    data: $("#ActivityType").val()
+                }).done(function (result) {
+                    if (result.startsWith("error:")) {
+                        alert(result.replace("error:", ""));
+                    }
+                    else {
+                        var r = JSON.parse(result);
+                        console.log(r);
+                        var $select = $('#Subject');
+                        $select.find('option').remove();
+                        for (var i = 0; i < r.value.length; i++) {
+                            var record = r.value[i];
+                            $select.append('<option value=' + record.Code + '>' + record.Description + '</option>');
+                        }
+                    }
+                });
+
+    }
+
     function selectRow(CardCode) {
-        alert(CardCode);
+        //alert(CardCode);
         $("#CardCode").val(CardCode);
         $("#ms").hide();
         $("#fm").show();
         CardCodeChanged();
     }
+<<<<<<< HEAD
 /*
+=======
+
+    function removeTableHeader()
+    {
+        $('#tableSearch thead').empty(); 
+    }
+
+    function removeTableBody(){
+        $('#tableSearch tbody').empty();
+    }
+
+
+    function getDateFormat() {
+        var d = new Date();
+        var m = d.getMonth() + 1;
+        var mes = (m < 10) ? '0' + m : m;
+        var result = d.getDate() + "-" + mes + "-" + d.getFullYear();
+        return result;
+    }
+
+    function getHourFormat(aditional)
+    {
+        var hour = new Date();
+        var h;
+        if (aditional > 0)
+            h = hour.getHours() + aditional;
+        else
+            h = hour.getHours();
+
+        var horario;
+
+        if (h<12)
+            horario = "AM";
+        else
+            horario = "PM";
+        return (h.toString()+ ":00 "+horario);
+    }
+
+>>>>>>> tmp
     function searchBusinessPartners() {
+        
         $("#btnSearch").prop("disabled", true);
         jQuery.ajax({
             type: 'post',
@@ -313,10 +448,18 @@
             }
             else {
                 var r = JSON.parse(result);
+<<<<<<< HEAD
                 console.log(r);
                 var t = $('<table><thead><tr><th>Codigo</th><th>Nombre</th></tr></thead></table>').addClass('table table-striped');
                 //var tbody = $('<tbody></tbody>');
                 //table.append(tbody);
+=======
+                var t = $('<table id=tableSearch><thead><th>Codigo</th><th>Nombre</th></thead><tbody></tbody></table>').addClass('table table-striped');
+                //var t = $('<table id=tableSearch><thead><tr><th>Codigo</th><th>Nombre</th></tr></thead></table>').addClass('table table-striped');
+               // var tbody = $('<tbody></tbody>');  //desc
+               // table.append(tbody);               //desc
+
+>>>>>>> tmp
                 for (var i = 0; i < r.value.length; i++) {
                     var record = r.value[i];
                     var row = "<tr id='@0' onclick='selectRow(\"@1\")'><td style='cursor:pointer'>@1</td><td style='cursor:pointer'>@2</td>";
@@ -327,6 +470,7 @@
             }
         });
     }
+<<<<<<< HEAD
 */
 
 /*function searchBusinessPartnersbi1() {
@@ -384,6 +528,11 @@ function searchBusinessPartnersbi1() {
     }
 
 
+=======
+
+
+    
+>>>>>>> tmp
 </script>
 
 </html>

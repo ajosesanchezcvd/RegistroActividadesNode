@@ -1,0 +1,11 @@
+Agregar campo area    "U_Area" 
+
+Agregar campo sub   "U_SubArea"
+
+
+
+
+
+SELECT T0."Code", T0."Name" FROM "@SBOAREA" T0;
+
+SELECT T0."U_SubAreaCod", T0."U_SubArea" FROM "@SBOSBAREA" T0 WHERE T0."Code" = $[OCLG.U_Area];

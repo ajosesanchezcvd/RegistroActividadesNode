@@ -3,25 +3,24 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <title>Control de actividades</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
+ <!-- Bootstrap core CSS -->
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
+    <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/5.0/examples/sign-in/signin.css" rel="stylesheet">
 
-</head>
+    <title>Sistema Registro de Actividades</title>
+    <meta name="theeme-color" content="#7952b3">
 
-<body>
-    <form id="fm" class="border border-light p-5">
-
+<<<<<<< HEAD
         <p class="h4 mb-4 text-center">Ingreso SAP </p>
         <input type="text" id="server" class="form-control mb-4" placeholder="Server" disabled="true">
         <input type="text" id="user" class="form-control mb-4" placeholder="Usuario">
@@ -34,9 +33,27 @@
             <option value="VISUALK_AR">VISUALK S.A</option>
             <option value="VK_PROCESOS">Procesos e Innovacion</option>
         </select>
+=======
+</head>
 
-        <button class="btn btn-info btn-block my-4" type="submit" id="btnLogin">Ingresar</button>
-    </form>
+<body class="text-center">
+    <main class="form-signin">
+        <form id="fm" class="border border-light p-5">
+            <p class="h4 mb-4 text-center">Ingreso SAP</p>
+            <input type="text" id="server" class="form-control mb-4" placeholder="Server" disabled="true">
+            <input type="text" id="user" class="form-control mb-4" placeholder="Usuario" required autofocus>
+            <input type="password" id="password" class="form-control mb-4" placeholder="Password">
+        <!--  <input type="text" id="company" class="form-control mb-4" placeholder="Sociedad"> -->
+            <select id="company" name="company" class="form-control mb-4" placeholder="Sociedad">
+                <option value="VISUALK_CL" selected>Visual Knowledge Chile S.A.</option>
+                <option value="VISUALD_CL_1">Visual Developer Chile S.A.</option>
+            </select>
+>>>>>>> tmp
+
+            <button class="w-100 btn btn-lg btn-primary" type="submit" id="btnLogin">Ingresar</button>
+            <p class="mt-5 mb-3 text-muted">&copy; Visual Developer 2021</p>
+        </form>
+    </main>
 </body>
 <script>
     $(document).ready(function () {
@@ -71,8 +88,12 @@
             if (result.startsWith("error:")) {
                 alert(result.replace("error:",""));
             } else {
-                alert("Cookie: " + result);
-                window.location.href = 'Home.html';
+                //let json = result.serializeFormJSON;
+                //console.log(result)
+                //console.log(json)
+                //alert("Cookie: " + result);
+                window.location.href = 'NewActivity.html';
+                //window.location.href = 'Home.html';
             }
         });
     }
