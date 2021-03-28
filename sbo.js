@@ -42,9 +42,9 @@ class Sbo {
         return this.utils.SiteSetting("host") + "/" + this.utils.SiteSetting("baseurl") + "/";
     }
 
-    get geturlBi1(){
+  /*  get geturlBi1(){
         return (this.utils.SiteSetting("urlB1i"));
-    }
+    }*/
 
     setRequestCookies(req) {
         let options = {
@@ -150,47 +150,6 @@ class Sbo {
         });
     }
 
-<<<<<<< HEAD
-    GetBusinessPartnerB1i(json, callback) {
-        var req = require("request");
-        let url = this.geturlBi1;
-        req.post({
-           // "rejectUnauthorized": false,
-            "headers": { "content-type": "application/json" },
-            "url": this.geturlBi1,
-            /*headers: {
-                'Cookie': this.utils.stringFormat("B1SESSION=%s,ROUTEID=%s", this.B1SESSION, this.ROUTEID)
-            },*/
-            "body":  '{  "command": " SELECT \"CardCode\", \"CardName\"   FROM \"VISUALK_CL\".\"OCRD\"  WHERE LOWER(\"CardCode\") LIKE LOWER(%Visual%)" }'
-=======
-    
-    GetActivitySubjects(code, callback){
-        var req = require("request");
-        //let url = this.geturl + "ActivitySubjects?$select=Code,Description&$filter=ActivityType ge 8 ";;
-        //console.log("codigo:" + code);
-       let url = this.geturl + "ActivitySubjects?$select=Code,Description&$filter=ActivityType ge " + code;
-      
-        req.get({
-            "rejectUnauthorized": false,
-            "url": url,
-            headers: {
-                'Cookie': this.utils.stringFormat("B1SESSION=%s,ROUTEID=%s", this.B1SESSION, this.ROUTEID)
-            }
->>>>>>> tmp
-        }, (error, response, body) => {
-            var result = this.GetError(error, body);
-            if (!this.utils.isError(result)) {
-                result = body
-            }
-            callback(result);
-        });
-    }
-
-
-<<<<<<< HEAD
-=======
-
->>>>>>> tmp
     GetBusinessPartners(filter, callback) {
         var req = require("request");
         let command = "BusinessPartners?$select=CardCode,CardName&$top=10";
@@ -213,6 +172,69 @@ class Sbo {
             callback(result);
         });
     }
+
+
+/*
+    GetBusinessPartnerB1i(json, callback) {
+        var req = require("request");
+        let url = this.geturlBi1;
+        req.post({
+           // "rejectUnauthorized": false,
+            "headers": { "content-type": "application/json" },
+            "url": this.geturlBi1,
+            /*headers: {
+                'Cookie': this.utils.stringFormat("B1SESSION=%s,ROUTEID=%s", this.B1SESSION, this.ROUTEID)
+            },*/
+    /*        "body":  '{  "command": " SELECT \"CardCode\", \"CardName\"   FROM \"VISUALK_CL\".\"OCRD\"  WHERE LOWER(\"CardCode\") LIKE LOWER(%Visual%)" }'
+        });
+    }
+    */
+    
+    GetActivitySubjects(code, callback){
+        var req = require("request");
+        //let url = this.geturl + "ActivitySubjects?$select=Code,Description&$filter=ActivityType ge 8 ";;
+        //console.log("codigo:" + code);
+       let url = this.geturl + "ActivitySubjects?$select=Code,Description&$filter=ActivityType ge " + code;
+      
+        req.get({
+            "rejectUnauthorized": false,
+            "url": url,
+            headers: {
+                'Cookie': this.utils.stringFormat("B1SESSION=%s,ROUTEID=%s", this.B1SESSION, this.ROUTEID)
+            }
+
+        }, (error, response, body) => {
+            var result = this.GetError(error, body);
+            if (!this.utils.isError(result)) {
+                result = body
+            }
+            callback(result);
+        });
+    }
+
+    GetSboSubAreas(code, callback){
+        var req = require("request");
+       let url = this.geturl + "SBO Areas('"+code+"')"; 
+       //console.log("URL:" + url);
+        req.get({
+            "rejectUnauthorized": false,
+            "url": url,
+            headers: {
+                'Cookie': this.utils.stringFormat("B1SESSION=%s,ROUTEID=%s", this.B1SESSION, this.ROUTEID)
+            }
+
+        }, (error, response, body) => {
+            var result = this.GetError(error, body);
+            if (!this.utils.isError(result)) {
+                result = body
+            }
+            callback(result);
+        });
+    }
+
+
+
+
 
     GetBusinessPartnerContactEmployes(CardCode, callback) {
         var req = require("request");

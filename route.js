@@ -84,10 +84,8 @@ router.post('/GetBusinessPartner', (req, res) => {
     });
 });
 
-<<<<<<< HEAD
 
-router.post('/AddActivity', (req, res) => {
-=======
+
 router.post('/GetActivitySubjects', (req, res) => {
     var result = "";
     sbo.B1SESSION = req.cookies.B1SESSION;
@@ -98,8 +96,18 @@ router.post('/GetActivitySubjects', (req, res) => {
     });
 });
 
-router.post('/GetBusinessPartners', (req, res) => {
->>>>>>> tmp
+router.post('/GetSboSubAreas', (req, res) => {
+    var result = "";
+    sbo.B1SESSION = req.cookies.B1SESSION;
+    sbo.ROUTEID = req.cookies.ROUTEID;
+    let body = req.body;
+    result = sbo.GetSboSubAreas(body, function (result) {
+        res.send(result);
+    });
+});
+
+/*router.post('/GetBusinessPartners', (req, res) => {
+
     sbo.B1SESSION = req.cookies.B1SESSION;
     sbo.ROUTEID = req.cookies.ROUTEID;
     let body = req.body;
@@ -107,8 +115,9 @@ router.post('/GetBusinessPartners', (req, res) => {
         res.send(result);
     });
 });
+*/
 
-router.post('/GetBusinessPartnersB1i', (req, res) => {
+/*router.post('/GetBusinessPartnersB1i', (req, res) => {
     //console.log(req);
     var result = "";
     sbo.B1SESSION = req.cookies.B1SESSION;
@@ -119,10 +128,7 @@ router.post('/GetBusinessPartnersB1i', (req, res) => {
         res.send(result);
     });
 });
-
-
-
-
+*/
 
 router.post('/GetBusinessPartners', (req, res) => {
     sbo.B1SESSION = req.cookies.B1SESSION;
@@ -142,6 +148,13 @@ router.post('/GetBusinessPartnerContactEmployes', (req, res) => {
     });
 });
 
-
+router.post('/AddActivity', (req, res) => {
+    sbo.B1SESSION = req.cookies.B1SESSION;
+    sbo.ROUTEID = req.cookies.ROUTEID;
+    let body = req.body;
+    sbo.addActivity(body, function (result) {
+        res.send(result);
+    });
+});
 
 module.exports = router

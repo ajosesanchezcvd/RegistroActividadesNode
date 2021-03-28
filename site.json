@@ -5,6 +5,5 @@
     "checkLogin": true,
     "user": "asanchez",
     "password": "19045403",
-    "company": "TEST_VISUALK_CL",
-    "urlB1i": "http://datacenter.visualk.cl:60880/B1iXcellerator/exec/ipo/.DEV.VID.FramworkVD.VID.VisualK_CL/com.sap.b1i.dev.scenarios.setup/VID.FramworkVD/VID.VisualK_CL.ipo/VIDVisualKCL.VID.ReceiveDoQuery"
+    "company": "TEST_VISUALK_CL"
 }

@@ -1,11 +1,26 @@
+https://datacenter.visualk.cl:10500/b1s/v1/SBOSBAREA?$select=Code,Name&$filter=Code ge 'Implemen'
+
+https://datacenter.visualk.cl:10500/b1s/v1/ActivitySubjects?$select=Code,Description&$filter=ActivityType ge 8
+
+https://datacenter.visualk.cl:10500/b1s/v1/SBO_Areas?
+
+
+https://datacenter.visualk.cl:10500/b1s/v1/SBO Areas('Implemen')
+
+
+
+
 Agregar campo area    "U_Area" 
 
 Agregar campo sub   "U_SubArea"
 
 
-
+SBO Areas
 
 
 SELECT T0."Code", T0."Name" FROM "@SBOAREA" T0;
 
 SELECT T0."U_SubAreaCod", T0."U_SubArea" FROM "@SBOSBAREA" T0 WHERE T0."Code" = $[OCLG.U_Area];
+
+
+SELECT T0."U_SubAreaCod", T0."U_SubArea" FROM "@SBOSBAREA" T0 WHERE T0."Code" = 'Implemen';
